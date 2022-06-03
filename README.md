@@ -54,8 +54,8 @@ root                    		(project root folder)
 
 ## Authors
 ---
-•	Natalia Paredes - nparedes517@yahoo.com
-•	Manuel Said Nava Ruiz - nav22003@byui.edu
-•	Edgar Valderrama - valderrama311@gmail.com
-•	Diana Quispe - diannaquispe@gmail.com
+* Natalia Paredes - nparedes517@yahoo.com
+* Manuel Said Nava Ruiz - nav22003@byui.edu
+* Edgar Valderrama - valderrama311@gmail.com
+* Diana Quispe - diannaquispe@gmail.com
 
