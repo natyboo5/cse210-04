@@ -12,20 +12,30 @@ class Artifact(Actor):
     """
     def __init__(self):
         super().__init__()
-        self._message = ""
+        self._score = 0
+        # self._message = ""
         
-    def get_message(self):
-        """Gets the artifact's message.
+    def add_point(self):
+        """Add one point.
         
         Returns:
-            string: The message.
+            None
         """
-        return self._message
+        self._score += 1
     
-    def set_message(self, message):
-        """Updates the message to the given one.
+    def lose_point(self):
+        """Lose one point.
         
-        Args:
-            message (string): The given message.
+        Returns:
+            None
         """
-        self._message = message
+        self._score -= 1
+
+    def get_score(self):
+        """Return the new score.
+        
+        Returns:
+            self._score: New score
+        """
+
+        return self._score
