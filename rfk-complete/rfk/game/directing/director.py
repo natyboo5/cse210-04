@@ -43,30 +43,32 @@ class Director:
         robot.set_velocity(velocity)        
 
     def _do_updates(self, cast):
-        """Updates the robot's position and resolves any collisions with artifacts.
+        """Updates the robot's position, resolves any collisions with gems and removes them from the screen. 
+            Obtains the score of the game
         
         Args:
             cast (Cast): The cast of actors.
         """
         banner = cast.get_first_actor("banners")
         robot = cast.get_first_actor("robots")
-        artifacts = cast.get_actors("artifacts")
+        gems = cast.get_actors("gems")
 
         banner.set_text("score")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
         
-        for artifact in artifacts:
-            artifact.move_next(max_x, max_y)
-            if robot.get_position().equals(artifact.get_position()):
-                if artifact.get_text() =="ö":
-                    artifact.lose_point()
+        
+        for gem in gems:
+            gem.move_next(max_x, max_y)
+            if robot.get_position().equals(gem.get_position()):
+                if gem.get_text() =="ö":
+                    gem.lose_point()
                 else:
-                    if artifact.get_text() =="¤":
-                        artifact.add_point()
-                self._score += artifact.get_score()
-                cast.remove_actor("artifacts", artifact)
+                    if gem.get_text() =="¤":
+                        gem.add_point()
+                self._score += gem.get_score()
+                cast.remove_actor("gems", gem)
 
         banner.set_text(f'score: {self._score}')    
         
