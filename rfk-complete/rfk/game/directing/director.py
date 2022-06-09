@@ -66,6 +66,7 @@ class Director:
                     if artifact.get_text() =="¤":
                         artifact.add_point()
                 self._score = artifact.get_score()
+                cast.remove_actor("artifacts", artifact)
 
         banner.set_text(f'score: {self._score}')    
         
