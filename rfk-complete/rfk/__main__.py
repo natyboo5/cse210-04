@@ -2,7 +2,7 @@ import os
 import random
 
 from game.casting.actor import Actor
-from game.casting.artifact import Artifact
+from game.casting.gem import Gem
 from game.casting.cast import Cast
 
 from game.directing.director import Director
@@ -18,12 +18,12 @@ FRAME_RATE = 12
 MAX_X = 900
 MAX_Y = 600
 CELL_SIZE = 15
-FONT_SIZE = 15
+FONT_SIZE = 25
 COLS = 60
 ROWS = 40
 CAPTION = "Robot Finds Kitten"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 40
+DEFAULT_GEMS = 40
 
 
 def main():
@@ -51,8 +51,8 @@ def main():
     robot.set_position(position)
     cast.add_actor("robots", robot)
 
-     # create the artifacts
-    for n in range(DEFAULT_ARTIFACTS):
+     # create the gems
+    for n in range(DEFAULT_GEMS):
         elements = ['ö', '¤']
         text = elements[random.randint(0, 1)]
 
@@ -66,13 +66,13 @@ def main():
         b = random.randint(0, 255)
         color = Color(r, g, b)
 
-        artifact = Artifact()
-        artifact.set_velocity(Point(0,3))
-        artifact.set_text(text)
-        artifact.set_font_size(FONT_SIZE)
-        artifact.set_color(color)
-        artifact.set_position(position)
-        cast.add_actor("artifacts", artifact)
+        gem = Gem()
+        gem.set_velocity(Point(0,3))
+        gem.set_text(text)
+        gem.set_font_size(FONT_SIZE)
+        gem.set_color(color)
+        gem.set_position(position)
+        cast.add_actor("gems", gem)
 
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
