@@ -53,7 +53,7 @@ def main():
 
      # create the artifacts
     for n in range(DEFAULT_ARTIFACTS):
-        elements = ['O', '*']
+        elements = ['¤', 'ö']
         text = elements[random.randint(0, 1)]
 
         x = random.randint(1, COLS - 1)
