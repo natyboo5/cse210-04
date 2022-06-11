@@ -15,6 +15,7 @@ Greed is played according to the following rules.
 * If the player touches a gem, they earn a point.
 * If the player touches a rock, they lose a point.
 * Gems and rocks are removed when the player touches them.
+* After touching 10 elements, 20 more appear.
 * The game continues until the player closes the window.
 
 ## Getting Started

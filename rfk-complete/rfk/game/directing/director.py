@@ -1,3 +1,12 @@
+import random
+from game.casting.gem import Gem
+from game.shared.point import Point
+from game.shared.color import Color
+
+COLS = 60
+ROWS = 40
+DEFAULT_GEMS = 20
+
 class Director:
     """A person who directs the game. 
     
@@ -18,19 +27,53 @@ class Director:
         self._keyboard_service = keyboard_service
         self._video_service = video_service
         self._score = 0
+        self._again =0
         
-    def start_game(self, cast):
+    def start_game(self, cast, CELL, FONT):
         """Starts the game using the given cast. Runs the main game loop.
 
         Args:
             cast (Cast): The cast of actors.
         """
+        self._CELL_SIZE = CELL
+        self._FONT_SIZE = FONT
+        self._add_gems(cast)
         self._video_service.open_window()
+
         while self._video_service.is_window_open():
             self._get_inputs(cast)
             self._do_updates(cast)
             self._do_outputs(cast)
         self._video_service.close_window()
+
+    def _add_gems(self,cast):
+        """After touching 10 elements, 20 more appear
+        
+        Args:
+            cast (Cast): The cast of actors.
+        """
+        # create the gems and rocks
+        for _ in range(DEFAULT_GEMS):
+            elements = ['ö', '¤', '¤', '¤']
+            text = elements[random.randint(0, 3)]
+
+            x = random.randint(1, COLS - 1)
+            y = random.randint(1, ROWS - 1)
+            position = Point(x, y)
+            position = position.scale(self._CELL_SIZE)
+
+            r = random.randint(0, 255)
+            g = random.randint(0, 255)
+            b = random.randint(0, 255)
+            color = Color(r, g, b)
+
+            gem = Gem()
+            gem.set_velocity(Point(0,3))
+            gem.set_text(text)
+            gem.set_font_size(self._FONT_SIZE)
+            gem.set_color(color)
+            gem.set_position(position)
+            cast.add_actor("gems", gem)
 
     def _get_inputs(self, cast):
         """Gets directional input from the keyboard and applies it to the robot.
@@ -69,6 +112,11 @@ class Director:
                         gem.add_point()
                 self._score += gem.get_score()
                 cast.remove_actor("gems", gem)
+
+                self._again += 1
+                if self._again == 10:
+                    self._add_gems(cast)
+                    self._again = 0
 
         banner.set_text(f'score: {self._score}')    
         

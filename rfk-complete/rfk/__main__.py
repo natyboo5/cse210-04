@@ -1,8 +1,5 @@
-import os
-import random
 
 from game.casting.actor import Actor
-from game.casting.gem import Gem
 from game.casting.cast import Cast
 
 from game.directing.director import Director
@@ -19,11 +16,8 @@ MAX_X = 900
 MAX_Y = 600
 CELL_SIZE = 15
 FONT_SIZE = 25
-COLS = 60
-ROWS = 40
-CAPTION = "Robot Finds Kitten"
+CAPTION = "GREED"
 WHITE = Color(255, 255, 255)
-DEFAULT_GEMS = 40
 
 
 def main():
@@ -51,34 +45,11 @@ def main():
     robot.set_position(position)
     cast.add_actor("robots", robot)
 
-     # create the gems
-    for n in range(DEFAULT_GEMS):
-        elements = ['ö', '¤']
-        text = elements[random.randint(0, 1)]
-
-        x = random.randint(1, COLS - 1)
-        y = random.randint(1, ROWS - 1)
-        position = Point(x, y)
-        position = position.scale(CELL_SIZE)
-
-        r = random.randint(0, 255)
-        g = random.randint(0, 255)
-        b = random.randint(0, 255)
-        color = Color(r, g, b)
-
-        gem = Gem()
-        gem.set_velocity(Point(0,3))
-        gem.set_text(text)
-        gem.set_font_size(FONT_SIZE)
-        gem.set_color(color)
-        gem.set_position(position)
-        cast.add_actor("gems", gem)
-
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
     director = Director(keyboard_service, video_service)
-    director.start_game(cast)
+    director.start_game(cast, CELL_SIZE, FONT_SIZE)
 
 
 if __name__ == "__main__":
